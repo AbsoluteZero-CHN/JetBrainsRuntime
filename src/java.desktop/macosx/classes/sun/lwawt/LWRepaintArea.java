@@ -26,8 +26,7 @@
 
 package sun.lwawt;
 
-import java.awt.Component;
-import java.awt.Graphics;
+import java.awt.*;
 
 import sun.awt.AWTAccessor;
 import sun.awt.RepaintArea;
@@ -58,6 +57,17 @@ final class LWRepaintArea extends RepaintArea {
             }
             super.paintComponent(comp, g);
             LWComponentPeer.flushOnscreenGraphics();
+        }
+    }
+
+    @Override
+    public void paint(Object target, boolean shouldClearRectBeforePaint) {
+        try {
+            super.paint(target, shouldClearRectBeforePaint);
+        } finally {
+            if (target instanceof Window window) {
+                AWTAccessor.getWindowAccessor().updateWindow(window);
+            }
         }
     }
 }
