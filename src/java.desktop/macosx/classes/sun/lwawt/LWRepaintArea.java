@@ -51,12 +51,18 @@ final class LWRepaintArea extends RepaintArea {
     @Override
     protected void paintComponent(final Component comp, final Graphics g) {
         if (comp != null) {
-            Object peer = AWTAccessor.getComponentAccessor().getPeer(comp);
-            if (peer != null) {
-                ((LWComponentPeer<?, ?>) peer).paintPeer(g);
+            if (AWTAccessor.getComponentAccessor().getPeer(comp) instanceof LWComponentPeer<?, ?> peer) {
+                peer.paintPeer(g);
+                super.paintComponent(comp, g);
+                Component parent = comp;
+                while (parent.getParent() != null) {
+                    parent = parent.getParent();
+                }
+                if (parent instanceof Window window) {
+                    AWTAccessor.getWindowAccessor().updateWindow(window);
+                }
+                LWComponentPeer.flushOnscreenGraphics();
             }
-            super.paintComponent(comp, g);
-            LWComponentPeer.flushOnscreenGraphics();
         }
     }
 
@@ -65,8 +71,12 @@ final class LWRepaintArea extends RepaintArea {
         try {
             super.paint(target, shouldClearRectBeforePaint);
         } finally {
-            if (target instanceof Window window) {
-                AWTAccessor.getWindowAccessor().updateWindow(window);
+            if (target instanceof Component comp) {
+                while(comp.getParent() !=null) comp = comp.getParent();
+                if (comp instanceof Window window) {
+                    AWTAccessor.getWindowAccessor().updateWindow(window);
+                    LWComponentPeer.flushOnscreenGraphics();
+                }
             }
         }
     }
