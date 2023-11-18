@@ -124,6 +124,7 @@ Java_sun_java2d_metal_MTLRenderQueue_flushBuffer
                 // draw ops
                 case sun_java2d_pipe_BufferedOpCodes_DRAW_LINE:
                 {
+                    fprintf(stderr, "_DRAW_LINE\n");
                     CHECK_RENDER_OP(MTL_OP_OTHER, dstOps, sync);
 
                     if ([mtlc useXORComposite]) {
@@ -140,6 +141,7 @@ Java_sun_java2d_metal_MTLRenderQueue_flushBuffer
                 }
                 case sun_java2d_pipe_BufferedOpCodes_DRAW_RECT:
                 {
+                    fprintf(stderr, "_DRAW_RECT\n");
                     CHECK_RENDER_OP(MTL_OP_OTHER, dstOps, sync);
 
                     if ([mtlc useXORComposite]) {
@@ -157,6 +159,7 @@ Java_sun_java2d_metal_MTLRenderQueue_flushBuffer
                 }
                 case sun_java2d_pipe_BufferedOpCodes_DRAW_POLY:
                 {
+                    fprintf(stderr, "_DRAW_POLY\n");
                     CHECK_RENDER_OP(MTL_OP_OTHER, dstOps, sync);
 
                     jint nPoints      = NEXT_INT(b);
@@ -193,6 +196,8 @@ Java_sun_java2d_metal_MTLRenderQueue_flushBuffer
                 }
                 case sun_java2d_pipe_BufferedOpCodes_DRAW_PIXEL:
                 {
+                    fprintf(stderr, "_DRAW_PIXEL\n");
+
                     CHECK_RENDER_OP(MTL_OP_OTHER, dstOps, sync);
 
                     if ([mtlc useXORComposite]) {
@@ -209,6 +214,8 @@ Java_sun_java2d_metal_MTLRenderQueue_flushBuffer
                 }
                 case sun_java2d_pipe_BufferedOpCodes_DRAW_SCANLINES:
                 {
+                    fprintf(stderr, "_DRAW_SCANLINES\n");
+
                     CHECK_RENDER_OP(MTL_OP_OTHER, dstOps, sync);
 
                     if ([mtlc useXORComposite]) {
@@ -226,6 +233,8 @@ Java_sun_java2d_metal_MTLRenderQueue_flushBuffer
                 }
                 case sun_java2d_pipe_BufferedOpCodes_DRAW_PARALLELOGRAM:
                 {
+                    fprintf(stderr, "_DRAW_PARALLELOGRAM\n");
+
                     CHECK_RENDER_OP(MTL_OP_OTHER, dstOps, sync);
 
                     if ([mtlc useXORComposite]) {
@@ -253,6 +262,8 @@ Java_sun_java2d_metal_MTLRenderQueue_flushBuffer
                 }
                 case sun_java2d_pipe_BufferedOpCodes_DRAW_AAPARALLELOGRAM:
                 {
+                    fprintf(stderr, "_DRAW_AAPARALLELOGRAM\n");
+
                     CHECK_RENDER_OP(MTL_OP_OTHER, dstOps, sync);
 
                     jfloat x11 = NEXT_FLOAT(b);
@@ -275,6 +286,8 @@ Java_sun_java2d_metal_MTLRenderQueue_flushBuffer
                 // fill ops
                 case sun_java2d_pipe_BufferedOpCodes_FILL_RECT:
                 {
+                    fprintf(stderr, "_FILL_RECT\n");
+
                     CHECK_RENDER_OP(MTL_OP_OTHER, dstOps, sync);
 
                     if ([mtlc useXORComposite]) {
@@ -292,6 +305,8 @@ Java_sun_java2d_metal_MTLRenderQueue_flushBuffer
                 }
                 case sun_java2d_pipe_BufferedOpCodes_FILL_SPANS:
                 {
+                    fprintf(stderr, "_FILL_SPANS\n");
+
                     CHECK_RENDER_OP(MTL_OP_OTHER, dstOps, sync);
 
                     if ([mtlc useXORComposite]) {
@@ -307,6 +322,8 @@ Java_sun_java2d_metal_MTLRenderQueue_flushBuffer
                 }
                 case sun_java2d_pipe_BufferedOpCodes_FILL_PARALLELOGRAM:
                 {
+                    fprintf(stderr, "_FILL_PARALLELOGRAM\n");
+
                     CHECK_RENDER_OP(MTL_OP_OTHER, dstOps, sync);
 
                     if ([mtlc useXORComposite]) {
@@ -330,6 +347,8 @@ Java_sun_java2d_metal_MTLRenderQueue_flushBuffer
                 }
                 case sun_java2d_pipe_BufferedOpCodes_FILL_AAPARALLELOGRAM:
                 {
+                    fprintf(stderr, "_FILL_AAPARALLELOGRAM\n");
+
                     CHECK_RENDER_OP(MTL_OP_OTHER, dstOps, sync);
                     jfloat x11 = NEXT_FLOAT(b);
                     jfloat y11 = NEXT_FLOAT(b);
@@ -347,6 +366,8 @@ Java_sun_java2d_metal_MTLRenderQueue_flushBuffer
                 // text-related ops
                 case sun_java2d_pipe_BufferedOpCodes_DRAW_GLYPH_LIST:
                 {
+                    fprintf(stderr, "_DRAW_GLYPH_LIST\n");
+
                     CHECK_RENDER_OP(MTL_OP_OTHER, dstOps, sync);
 
                     if ([mtlc useXORComposite]) {
@@ -390,6 +411,8 @@ Java_sun_java2d_metal_MTLRenderQueue_flushBuffer
                 // copy-related ops
                 case sun_java2d_pipe_BufferedOpCodes_COPY_AREA:
                 {
+                    fprintf(stderr, "_COPY_AREA\n");
+
                     CHECK_RENDER_OP(MTL_OP_OTHER, dstOps, sync);
                     jint x  = NEXT_INT(b);
                     jint y  = NEXT_INT(b);
@@ -403,6 +426,8 @@ Java_sun_java2d_metal_MTLRenderQueue_flushBuffer
                 }
                 case sun_java2d_pipe_BufferedOpCodes_BLIT:
                 {
+                    fprintf(stderr, "_BLIT\n");
+
                     CHECK_PREVIOUS_OP(MTL_OP_OTHER);
                     jint packedParams = NEXT_INT(b);
                     jint sx1          = NEXT_INT(b);
@@ -442,6 +467,8 @@ Java_sun_java2d_metal_MTLRenderQueue_flushBuffer
                 }
                 case sun_java2d_pipe_BufferedOpCodes_SURFACE_TO_SW_BLIT:
                 {
+                    fprintf(stderr, "_SURFACE_TO_SW_BLIT\n");
+
                     CHECK_PREVIOUS_OP(MTL_OP_OTHER);
                     jint sx      = NEXT_INT(b);
                     jint sy      = NEXT_INT(b);
@@ -459,6 +486,8 @@ Java_sun_java2d_metal_MTLRenderQueue_flushBuffer
                 }
                 case sun_java2d_pipe_BufferedOpCodes_MASK_FILL:
                 {
+                    fprintf(stderr, "_MASK_FILL\n");
+
                     jint x        = NEXT_INT(b);
                     jint y        = NEXT_INT(b);
                     jint w        = NEXT_INT(b);
@@ -477,6 +506,8 @@ Java_sun_java2d_metal_MTLRenderQueue_flushBuffer
                 }
                 case sun_java2d_pipe_BufferedOpCodes_MASK_BLIT:
                 {
+                    fprintf(stderr, "_MASK_BLIT\n");
+
                     CHECK_RENDER_OP(MTL_OP_OTHER, dstOps, sync);
                     jint dstx     = NEXT_INT(b);
                     jint dsty     = NEXT_INT(b);
@@ -492,6 +523,8 @@ Java_sun_java2d_metal_MTLRenderQueue_flushBuffer
                 // state-related ops
                 case sun_java2d_pipe_BufferedOpCodes_SET_RECT_CLIP:
                 {
+                    fprintf(stderr, "_SET_RECT_CLIP\n");
+
                     CHECK_PREVIOUS_OP(MTL_OP_OTHER);
                     jint x1 = NEXT_INT(b);
                     jint y1 = NEXT_INT(b);
@@ -502,12 +535,16 @@ Java_sun_java2d_metal_MTLRenderQueue_flushBuffer
                 }
                 case sun_java2d_pipe_BufferedOpCodes_BEGIN_SHAPE_CLIP:
                 {
+                    fprintf(stderr, "_BEGIN_SHAPE_CLIP\n");
+
                     CHECK_PREVIOUS_OP(MTL_OP_OTHER);
                     [mtlc beginShapeClip:dstOps];
                     break;
                 }
                 case sun_java2d_pipe_BufferedOpCodes_SET_SHAPE_CLIP_SPANS:
                 {
+                    fprintf(stderr, "_SET_SHAPE_CLIP_SPANS\n");
+
                     CHECK_PREVIOUS_OP(MTL_OP_SHAPE_CLIP_SPANS);
                     // This results in creation of new render encoder with
                     // stencil buffer set as render target
@@ -518,18 +555,24 @@ Java_sun_java2d_metal_MTLRenderQueue_flushBuffer
                 }
                 case sun_java2d_pipe_BufferedOpCodes_END_SHAPE_CLIP:
                 {
+                    fprintf(stderr, "_END_SHAPE_CLIP\n");
+
                     CHECK_PREVIOUS_OP(MTL_OP_OTHER);
                     [mtlc endShapeClip:dstOps];
                     break;
                 }
                 case sun_java2d_pipe_BufferedOpCodes_RESET_CLIP:
                 {
+                    fprintf(stderr, "_RESET_CLIP\n");
+
                     CHECK_PREVIOUS_OP(MTL_OP_OTHER);
                     [mtlc resetClip];
                     break;
                 }
                 case sun_java2d_pipe_BufferedOpCodes_SET_ALPHA_COMPOSITE:
                 {
+                    fprintf(stderr, "_SET_ALPHA_COMPOSITE\n");
+
                     CHECK_PREVIOUS_OP(MTL_OP_OTHER);
                     jint rule         = NEXT_INT(b);
                     jfloat extraAlpha = NEXT_FLOAT(b);
@@ -539,6 +582,8 @@ Java_sun_java2d_metal_MTLRenderQueue_flushBuffer
                 }
                 case sun_java2d_pipe_BufferedOpCodes_SET_XOR_COMPOSITE:
                 {
+                    fprintf(stderr, "_SET_XOR_COMPOSITE\n");
+
                     CHECK_PREVIOUS_OP(MTL_OP_OTHER);
                     jint xorPixel = NEXT_INT(b);
                     [mtlc setXorComposite:xorPixel];
@@ -546,6 +591,8 @@ Java_sun_java2d_metal_MTLRenderQueue_flushBuffer
                 }
                 case sun_java2d_pipe_BufferedOpCodes_RESET_COMPOSITE:
                 {
+                    fprintf(stderr, "_RESET_COMPOSITE\n");
+
                     /* TODO: check whether something needs to be done here if we are moving out of XOR composite
                     commitEncodedCommands();
                     MTLCommandBufferWrapper * cbwrapper = [mtlc pullCommandBufferWrapper];
@@ -560,6 +607,8 @@ Java_sun_java2d_metal_MTLRenderQueue_flushBuffer
                 }
                 case sun_java2d_pipe_BufferedOpCodes_SET_TRANSFORM:
                 {
+                    fprintf(stderr, "_SET_TRANSFORM\n");
+
                     CHECK_PREVIOUS_OP(MTL_OP_OTHER);
                     jdouble m00 = NEXT_DOUBLE(b);
                     jdouble m10 = NEXT_DOUBLE(b);
@@ -572,6 +621,8 @@ Java_sun_java2d_metal_MTLRenderQueue_flushBuffer
                 }
                 case sun_java2d_pipe_BufferedOpCodes_RESET_TRANSFORM:
                 {
+                    fprintf(stderr, "_RESET_TRANSFORM\n");
+
                     CHECK_PREVIOUS_OP(MTL_OP_OTHER);
                     [mtlc resetTransform];
                     break;
@@ -580,6 +631,8 @@ Java_sun_java2d_metal_MTLRenderQueue_flushBuffer
                 // context-related ops
                 case sun_java2d_pipe_BufferedOpCodes_SET_SURFACES:
                 {
+                    fprintf(stderr, "_SET_SURFACES\n");
+
                     CHECK_PREVIOUS_OP(MTL_OP_OTHER);
                     jlong pSrc = NEXT_LONG(b);
                     jlong pDst = NEXT_LONG(b);
@@ -600,6 +653,8 @@ Java_sun_java2d_metal_MTLRenderQueue_flushBuffer
                 }
                 case sun_java2d_pipe_BufferedOpCodes_SET_SCRATCH_SURFACE:
                 {
+                    fprintf(stderr, "_SET_SCRATCH_SURFACE\n");
+
                     CHECK_PREVIOUS_OP(MTL_OP_OTHER);
                     jlong pConfigInfo = NEXT_LONG(b);
                     MTLGraphicsConfigInfo *mtlInfo =
@@ -621,6 +676,8 @@ Java_sun_java2d_metal_MTLRenderQueue_flushBuffer
                 }
                 case sun_java2d_pipe_BufferedOpCodes_FLUSH_SURFACE:
                 {
+                    fprintf(stderr, "_FLUSH_SURFACE\n");
+
                     CHECK_PREVIOUS_OP(MTL_OP_OTHER);
                     jlong pData = NEXT_LONG(b);
                     BMTLSDOps *mtlsdo = (BMTLSDOps *)jlong_to_ptr(pData);
@@ -634,6 +691,8 @@ Java_sun_java2d_metal_MTLRenderQueue_flushBuffer
                 }
                 case sun_java2d_pipe_BufferedOpCodes_DISPOSE_SURFACE:
                 {
+                    fprintf(stderr, "_DISPOSE_SURFACE\n");
+
                     CHECK_PREVIOUS_OP(MTL_OP_OTHER);
                     jlong pData = NEXT_LONG(b);
                     BMTLSDOps *mtlsdo = (BMTLSDOps *)jlong_to_ptr(pData);
@@ -648,6 +707,8 @@ Java_sun_java2d_metal_MTLRenderQueue_flushBuffer
                 }
                 case sun_java2d_pipe_BufferedOpCodes_DISPOSE_CONFIG:
                 {
+                    fprintf(stderr, "_DISPOSE_CONFIG\n");
+
                     CHECK_PREVIOUS_OP(MTL_OP_OTHER);
                     jlong pConfigInfo = NEXT_LONG(b);
                     CONTINUE_IF_NULL(mtlc);
@@ -661,6 +722,8 @@ Java_sun_java2d_metal_MTLRenderQueue_flushBuffer
 
                 case sun_java2d_pipe_BufferedOpCodes_SYNC:
                 {
+                    fprintf(stderr, "_SYNC\n");
+
                     CHECK_PREVIOUS_OP(MTL_OP_SYNC);
                     sync = YES;
                     break;
@@ -673,12 +736,16 @@ Java_sun_java2d_metal_MTLRenderQueue_flushBuffer
                 // paint-related ops
                 case sun_java2d_pipe_BufferedOpCodes_RESET_PAINT:
                 {
-                  CHECK_PREVIOUS_OP(MTL_OP_RESET_PAINT);
+                    fprintf(stderr, "_RESET_PAINT\n");
+
+                    CHECK_PREVIOUS_OP(MTL_OP_RESET_PAINT);
                   [mtlc resetPaint];
                     break;
                 }
                 case sun_java2d_pipe_BufferedOpCodes_SET_COLOR:
                 {
+                    fprintf(stderr, "_SET_COLOR\n");
+
                     CHECK_PREVIOUS_OP(MTL_OP_SET_COLOR);
                     jint pixel = NEXT_INT(b);
                     [mtlc setColorPaint:pixel];
@@ -686,6 +753,8 @@ Java_sun_java2d_metal_MTLRenderQueue_flushBuffer
                 }
                 case sun_java2d_pipe_BufferedOpCodes_SET_GRADIENT_PAINT:
                 {
+                    fprintf(stderr, "_SET_GRADIENT_PAINT\n");
+
                     CHECK_PREVIOUS_OP(MTL_OP_OTHER);
                     jboolean useMask= NEXT_BOOLEAN(b);
                     jboolean cyclic = NEXT_BOOLEAN(b);
@@ -705,6 +774,8 @@ Java_sun_java2d_metal_MTLRenderQueue_flushBuffer
                 }
                 case sun_java2d_pipe_BufferedOpCodes_SET_LINEAR_GRADIENT_PAINT:
                 {
+                    fprintf(stderr, "_SET_LINEAR_GRADIENT_PAINT\n");
+
                     CHECK_PREVIOUS_OP(MTL_OP_OTHER);
                     jboolean useMask = NEXT_BOOLEAN(b);
                     jboolean linear  = NEXT_BOOLEAN(b);
@@ -729,6 +800,8 @@ Java_sun_java2d_metal_MTLRenderQueue_flushBuffer
                 }
                 case sun_java2d_pipe_BufferedOpCodes_SET_RADIAL_GRADIENT_PAINT:
                 {
+                    fprintf(stderr, "_SET_RADIAL_GRADIENT_PAINT\n");
+
                     CHECK_PREVIOUS_OP(MTL_OP_OTHER);
                     jboolean useMask = NEXT_BOOLEAN(b);
                     jboolean linear  = NEXT_BOOLEAN(b);
@@ -761,6 +834,8 @@ Java_sun_java2d_metal_MTLRenderQueue_flushBuffer
                 }
                 case sun_java2d_pipe_BufferedOpCodes_SET_TEXTURE_PAINT:
                 {
+                    fprintf(stderr, "_SET_TEXTURE_PAINT\n");
+
                     CHECK_PREVIOUS_OP(MTL_OP_OTHER);
                     jboolean useMask= NEXT_BOOLEAN(b);
                     jboolean filter = NEXT_BOOLEAN(b);
@@ -786,6 +861,8 @@ Java_sun_java2d_metal_MTLRenderQueue_flushBuffer
                 // BufferedImageOp-related ops
                 case sun_java2d_pipe_BufferedOpCodes_ENABLE_CONVOLVE_OP:
                 {
+                    fprintf(stderr, "_ENABLE_CONVOLVE_OP\n");
+
                     CHECK_PREVIOUS_OP(MTL_OP_OTHER);
                     jlong pSrc        = NEXT_LONG(b);
                     jboolean edgeZero = NEXT_BOOLEAN(b);
@@ -807,12 +884,16 @@ Java_sun_java2d_metal_MTLRenderQueue_flushBuffer
                 }
                 case sun_java2d_pipe_BufferedOpCodes_DISABLE_CONVOLVE_OP:
                 {
+                    fprintf(stderr, "_DISABLE_CONVOLVE_OP\n");
+
                     CHECK_PREVIOUS_OP(MTL_OP_OTHER);
                     [mtlc setBufImgOp:NULL];
                     break;
                 }
                 case sun_java2d_pipe_BufferedOpCodes_ENABLE_RESCALE_OP:
                 {
+                    fprintf(stderr, "_ENABLE_RESCALE_OP\n");
+
                     CHECK_PREVIOUS_OP(MTL_OP_OTHER);
                     jlong pSrc          = NEXT_LONG(b);
                     jboolean nonPremult = NEXT_BOOLEAN(b);
@@ -827,12 +908,16 @@ Java_sun_java2d_metal_MTLRenderQueue_flushBuffer
                 }
                 case sun_java2d_pipe_BufferedOpCodes_DISABLE_RESCALE_OP:
                 {
+                    fprintf(stderr, "_DISABLE_RESCALE_OP\n");
+
                     CHECK_PREVIOUS_OP(MTL_OP_OTHER);
                     [mtlc setBufImgOp:NULL];
                     break;
                 }
                 case sun_java2d_pipe_BufferedOpCodes_ENABLE_LOOKUP_OP:
                 {
+                    fprintf(stderr, "_ENABLE_LOOKUP_OP\n");
+
                     CHECK_PREVIOUS_OP(MTL_OP_OTHER);
                     jlong pSrc          = NEXT_LONG(b);
                     jboolean nonPremult = NEXT_BOOLEAN(b);
@@ -856,6 +941,8 @@ Java_sun_java2d_metal_MTLRenderQueue_flushBuffer
                 }
                 case sun_java2d_pipe_BufferedOpCodes_DISABLE_LOOKUP_OP:
                 {
+                    fprintf(stderr, "_DISABLE_LOOKUP_OP\n");
+
                     CHECK_PREVIOUS_OP(MTL_OP_OTHER);
                     [mtlc setBufImgOp:NULL];
                     break;
@@ -864,6 +951,7 @@ Java_sun_java2d_metal_MTLRenderQueue_flushBuffer
                 case sun_java2d_pipe_BufferedOpCodes_FLUSH_BUFFER:
                 {
                     CHECK_PREVIOUS_OP(MTL_OP_OTHER);
+                    fprintf(stderr, "FLUSH_BUFFER\n");
                     jlong pLayerPtr = NEXT_LONG(b);
                     [mtlc flushBuffer: (MTLLayer*)pLayerPtr];
                     break;
