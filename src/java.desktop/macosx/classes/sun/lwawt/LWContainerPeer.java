@@ -26,6 +26,7 @@
 package sun.lwawt;
 
 import sun.awt.SunGraphicsCallback;
+import sun.awt.SunToolkit;
 import sun.java2d.pipe.Region;
 
 import java.awt.Color;
@@ -117,6 +118,7 @@ abstract class LWContainerPeer<T extends Container, D extends JComponent>
 
         // Post an empty event to flush all the pending target paints
         postPaintEvent(0, 0, 0, 0);
+        System.err.println("---endLayout---");
     }
 
     // ---- PEER NOTIFICATIONS ---- //
@@ -203,6 +205,15 @@ abstract class LWContainerPeer<T extends Container, D extends JComponent>
         // Use the straight order of children, so the bottom
         // ones are painted first
         repaintChildren(toPaint);
+        if (this instanceof LWWindowPeer windowPeer) {
+            System.err.println("Repaint Window");
+            if (windowPeer != null) {
+                SunToolkit.executeOnEventHandlerThread(getTarget(),
+                        () -> windowPeer.updateWindow());
+            }
+        } else {
+            System.err.println("Repaint Container Peer");
+        }
     }
 
     /**

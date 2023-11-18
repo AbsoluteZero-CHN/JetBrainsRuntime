@@ -27,6 +27,7 @@
 package sun.lwawt;
 
 import java.awt.*;
+import java.lang.reflect.InvocationTargetException;
 
 import sun.awt.AWTAccessor;
 import sun.awt.RepaintArea;
@@ -59,7 +60,7 @@ final class LWRepaintArea extends RepaintArea {
                     parent = parent.getParent();
                 }
                 if (parent instanceof Window window) {
-                    AWTAccessor.getWindowAccessor().updateWindow(window);
+               //     AWTAccessor.getWindowAccessor().updateWindow(window);
                 }
                 LWComponentPeer.flushOnscreenGraphics();
             }
@@ -74,10 +75,29 @@ final class LWRepaintArea extends RepaintArea {
             if (target instanceof Component comp) {
                 while(comp.getParent() !=null) comp = comp.getParent();
                 if (comp instanceof Window window) {
-                    AWTAccessor.getWindowAccessor().updateWindow(window);
-                    LWComponentPeer.flushOnscreenGraphics();
+//                    AWTAccessor.getWindowAccessor().updateWindow(window);
+//                    LWComponentPeer.flushOnscreenGraphics();
                 }
             }
         }
+    }
+
+    public static void main(String[] args) {
+            //   SwingUtilities.invokeAndWait(() -> {
+            Frame f = new Frame();
+            f.setSize(new Dimension(300, 300));
+            Button b = new Button("dsdddd");
+            f.add(b);
+//        f.add(new Panel() {
+//            @Override
+//            public void paint(Graphics g) {
+//                super.paint(g);
+//                g.drawLine(10, 10, 100, 100);
+//                System.err.println("----DRAW LINE----\n");
+//            }
+//        });
+            f.setBackground(Color.BLUE);
+            f.setVisible(true);
+            // });
     }
 }

@@ -1376,6 +1376,11 @@ public abstract class LWComponentPeer<T extends Component, D extends JComponent>
         }
 
         postPaintEvent(toPaint.x, toPaint.y, toPaint.width, toPaint.height);
+        if (windowPeer != null) {
+            SunToolkit.executeOnEventHandlerThread(getTarget(),
+                    () -> windowPeer.updateWindow());
+        }
+        System.err.println("Repaint Peer");
     }
 
     /**
